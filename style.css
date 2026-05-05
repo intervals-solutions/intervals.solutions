@@ -126,6 +126,7 @@ nav {
 .btn-primary {
     background: var(--orange);
     color: var(--navy);
+    border: 2px solid var(--orange);
 }
 
 .btn-primary:hover {
