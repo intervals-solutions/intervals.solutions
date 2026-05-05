@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intervals - Music Theory Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            color: #667eea;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+        }
+
+        .interval-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .interval-demo h2 {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .interval-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .interval-btn {
+            padding: 1rem 2rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interval-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .interval-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .interval-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .interval-info h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Intervals</h1>
+        <p>Music Theory Solutions for Everyone</p>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Master Musical Intervals</h2>
+            <p>Intervals is a comprehensive platform designed to help musicians, students, and educators understand and practice musical intervals. Whether you're a beginner learning the basics or an advanced musician honing your skills, we provide the tools you need.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Interactive Learning</h3>
+                <p>Learn intervals through interactive exercises and real-time feedback. Our platform adapts to your skill level and helps you progress at your own pace.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Ear Training</h3>
+                <p>Develop your ear with our comprehensive interval recognition exercises. Train yourself to identify intervals by ear with increasing accuracy.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Music Theory</h3>
+                <p>Access detailed explanations of interval types, their properties, and how they function in music theory and composition.</p>
+            </div>
+        </section>
+
+        <section class="interval-demo">
+            <h2>Explore Interval Types</h2>
+            <div class="interval-buttons">
+                <button class="interval-btn" data-interval="unison">Unison</button>
+                <button class="interval-btn" data-interval="minor-second">Minor 2nd</button>
+                <button class="interval-btn" data-interval="major-second">Major 2nd</button>
+                <button class="interval-btn" data-interval="minor-third">Minor 3rd</button>
+                <button class="interval-btn" data-interval="major-third">Major 3rd</button>
+                <button class="interval-btn" data-interval="perfect-fourth">Perfect 4th</button>
+                <button class="interval-btn" data-interval="tritone">Tritone</button>
+                <button class="interval-btn" data-interval="perfect-fifth">Perfect 5th</button>
+                <button class="interval-btn" data-interval="minor-sixth">Minor 6th</button>
+                <button class="interval-btn" data-interval="major-sixth">Major 6th</button>
+                <button class="interval-btn" data-interval="minor-seventh">Minor 7th</button>
+                <button class="interval-btn" data-interval="major-seventh">Major 7th</button>
+                <button class="interval-btn" data-interval="octave">Octave</button>
+            </div>
+
+            <div class="interval-info" id="interval-info">
+                <h3>Select an interval above</h3>
+                <p>Click on any interval button to learn more about it.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Intervals. Hosted on <a href="https://pages.github.com/">GitHub Pages</a></p>
+        <p>Visit the <a href="https://github.com/anomalyco/intervals.solutions.gihub.io">GitHub Repository</a></p>
+    </footer>
+
+    <script>
+        const intervalData = {
+            'unison': {
+                name: 'Unison (P1)',
+                description: 'The interval between two identical notes. Both notes have the same pitch.',
+                examples: 'C to C, G to G, A to A',
+                semitones: '0 semitones'
+            },
+            'minor-second': {
+                name: 'Minor Second (m2)',
+                description: 'The smallest interval in Western music. It has a dissonant, tense sound.',
+                examples: 'C to Db, E to F, B to C',
+                semitones: '1 semitone'
+            },
+            'major-second': {
+                name: 'Major Second (M2)',
+                description: 'A whole step interval. Commonly found in scales between the first and second notes.',
+                examples: 'C to D, F to G, A to B',
+                semitones: '2 semitones'
+            },
+            'minor-third': {
+                name: 'Minor Third (m3)',
+                description: 'Gives a sad or melancholic quality. Essential in minor chords and scales.',
+                examples: 'C to Eb, A to C, E to G',
+                semitones: '3 semitones'
+            },
+            'major-third': {
+                name: 'Major Third (M3)',
+                description: 'Gives a happy or bright quality. Essential in major chords and scales.',
+                examples: 'C to E, F to A, G to B',
+                semitones: '4 semitones'
+            },
+            'perfect-fourth': {
+                name: 'Perfect Fourth (P4)',
+                description: 'A very stable interval, often used in harmonies and melodies.',
+                examples: 'C to F, G to C, D to G',
+                semitones: '5 semitones'
+            },
+            'tritone': {
+                name: 'Tritone (TT)',
+                description: 'Known as the "devil\'s interval" - it splits the octave exactly in half. Highly dissonant.',
+                examples: 'C to F#, G to C#, D to Ab',
+                semitones: '6 semitones'
+            },
+            'perfect-fifth': {
+                name: 'Perfect Fifth (P5)',
+                description: 'One of the most stable and consonant intervals. The power chord in rock music.',
+                examples: 'C to G, F to C, G to D',
+                semitones: '7 semitones'
+            },
+            'minor-sixth': {
+                name: 'Minor Sixth (m6)',
+                description: 'A moody interval often used in film scores for dramatic effect.',
+                examples: 'C to Ab, A to F, E to C',
+                semitones: '8 semitones'
+            },
+            'major-sixth': {
+                name: 'Major Sixth (M6)',
+                description: 'A bright, singing interval often used in major sixth chords.',
+                examples: 'C to A, F to D, G to E',
+                semitones: '9 semitones'
+            },
+            'minor-seventh': {
+                name: 'Minor Seventh (m7)',
+                description: 'Common in dominant seventh chords and minor seventh chords.',
+                examples: 'C to Bb, G to F, D to C',
+                semitones: '10 semitones'
+            },
+            'major-seventh': {
+                name: 'Major Seventh (M7)',
+                description: 'A dissonant interval that creates tension, often resolved to an octave.',
+                examples: 'C to B, F to E, G to F#',
+                semitones: '11 semitones'
+            },
+            'octave': {
+                name: 'Octave (P8)',
+                description: 'The same note at a higher or lower pitch. Very consonant and stable.',
+                examples: 'C to C (higher), A to A (lower), G to G (higher)',
+                semitones: '12 semitones'
+            }
+        };
+
+        const buttons = document.querySelectorAll('.interval-btn');
+        const infoDiv = document.getElementById('interval-info');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const interval = btn.dataset.interval;
+                const data = intervalData[interval];
+
+                infoDiv.innerHTML = `
+                    <h3>${data.name}</h3>
+                    <p><strong>Description:</strong> ${data.description}</p>
+                    <p><strong>Examples:</strong> ${data.examples}</p>
+                    <p><strong>Size:</strong> ${data.semitones}</p>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
