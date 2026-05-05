@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intervals - Music Theory Solutions</title>
-    <link rel="icon" type="image/png" href="images/Logo-Light background.png">
+    <title>Intervals - Schedule Notifications at Scale</title>
+    <link rel="icon" type="image/png" href="images/Logo-Dark background.png">
     <style>
         * {
             margin: 0;
@@ -12,333 +12,813 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --navy: #0F172A;
+            --white: #FFFFFF;
+            --orange: #F59E0B;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-700: #334155;
+            --gray-900: #0F172A;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: var(--navy);
+            background: var(--white);
         }
 
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        /* Navigation */
+        nav {
+            background: var(--navy);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        header h1 {
-            color: #667eea;
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            color: #666;
-            font-size: 1.2rem;
-        }
-
-        main {
+        .nav-container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-cta {
+            background: var(--orange);
+            color: var(--navy) !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Hero Section */
         .hero {
-            background: white;
-            border-radius: 12px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--navy) 0%, #1E293B 100%);
+            color: var(--white);
+            padding: 6rem 2rem;
             text-align: center;
         }
 
-        .hero h2 {
-            color: #333;
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero h1 .accent {
+            color: var(--orange);
         }
 
         .hero p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto 2rem;
+            font-size: 1.25rem;
+            color: var(--gray-300);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-card h3 {
-            color: #667eea;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: #666;
-        }
-
-        .interval-demo {
-            background: white;
-            border-radius: 12px;
-            padding: 3rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .interval-demo h2 {
-            color: #333;
-            margin-bottom: 2rem;
-        }
-
-        .interval-buttons {
+        .hero-buttons {
             display: flex;
-            flex-wrap: wrap;
             gap: 1rem;
             justify-content: center;
-            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .interval-btn {
-            padding: 1rem 2rem;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
+        .btn {
+            padding: 0.875rem 2rem;
             border-radius: 8px;
             font-size: 1rem;
-            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-block;
         }
 
-        .interval-btn:hover {
-            background: #667eea;
-            color: white;
+        .btn-primary {
+            background: var(--orange);
+            color: var(--navy);
         }
 
-        .interval-btn.active {
-            background: #667eea;
-            color: white;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
         }
 
-        .interval-info {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-top: 2rem;
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--gray-300);
         }
 
-        .interval-info h3 {
-            color: #667eea;
+        .btn-secondary:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
             margin-bottom: 1rem;
         }
 
-        footer {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            text-align: center;
-            color: #666;
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* What is Intervals */
+        #what-is {
+            background: var(--gray-100);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
 
-        footer a {
-            color: #667eea;
+        .benefit-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card h3 {
+            color: var(--orange);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-card p {
+            color: var(--gray-700);
+        }
+
+        /* How It Works */
+        .architecture-diagram {
+            background: var(--navy);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            overflow-x: auto;
+        }
+
+        .architecture-diagram pre {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .services-table th,
+        .services-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .services-table th {
+            background: var(--navy);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .services-table tr:hover {
+            background: var(--gray-100);
+        }
+
+        /* Quick Integration */
+        #integration {
+            background: var(--gray-100);
+        }
+
+        .code-block {
+            background: var(--navy);
+            color: var(--gray-300);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .code-block .keyword {
+            color: var(--orange);
+        }
+
+        .code-block .string {
+            color: #10B981;
+        }
+
+        /* Schedule Formats */
+        .format-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .format-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--gray-200);
+            transition: border-color 0.3s ease;
+        }
+
+        .format-card:hover {
+            border-color: var(--orange);
+        }
+
+        .format-card h3 {
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .format-card code {
+            background: var(--gray-100);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: block;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--orange);
+        }
+
+        /* Deployment */
+        #deployment {
+            background: var(--gray-100);
+        }
+
+        .deploy-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .deploy-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .deploy-card h3 {
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        /* Technology Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: var(--gray-100);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: var(--orange);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        .tech-item strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item span {
+            font-size: 0.9rem;
+            color: var(--gray-700);
+        }
+
+        .tech-item:hover span {
+            color: var(--navy);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: var(--gray-300);
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-300);
             text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .footer-section a:hover {
+            color: var(--orange);
         }
 
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-700);
+            color: var(--gray-700);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            header h1 {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-header h2 {
                 font-size: 2rem;
             }
 
-            .hero h2 {
-                font-size: 1.5rem;
+            .architecture-diagram {
+                padding: 1.5rem;
             }
+        }
 
-            .features {
-                grid-template-columns: 1fr;
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Intervals</h1>
-        <p>Music Theory Solutions for Everyone</p>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h2>Master Musical Intervals</h2>
-            <p>Intervals is a comprehensive platform designed to help musicians, students, and educators understand and practice musical intervals. Whether you're a beginner learning the basics or an advanced musician honing your skills, we provide the tools you need.</p>
-        </section>
-
-        <section class="features">
-            <div class="feature-card">
-                <h3>Interactive Learning</h3>
-                <p>Learn intervals through interactive exercises and real-time feedback. Our platform adapts to your skill level and helps you progress at your own pace.</p>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/Logo-Dark background.png" alt="Intervals Logo">
+                <span>Intervals</span>
             </div>
-            <div class="feature-card">
-                <h3>Ear Training</h3>
-                <p>Develop your ear with our comprehensive interval recognition exercises. Train yourself to identify intervals by ear with increasing accuracy.</p>
+            <div class="nav-links">
+                <a href="#what-is">What is Intervals</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#integration">Quick Start</a>
             </div>
-            <div class="feature-card">
-                <h3>Music Theory</h3>
-                <p>Access detailed explanations of interval types, their properties, and how they function in music theory and composition.</p>
-            </div>
-        </section>
+        </div>
+    </nav>
 
-        <section class="interval-demo">
-            <h2>Explore Interval Types</h2>
-            <div class="interval-buttons">
-                <button class="interval-btn" data-interval="unison">Unison</button>
-                <button class="interval-btn" data-interval="minor-second">Minor 2nd</button>
-                <button class="interval-btn" data-interval="major-second">Major 2nd</button>
-                <button class="interval-btn" data-interval="minor-third">Minor 3rd</button>
-                <button class="interval-btn" data-interval="major-third">Major 3rd</button>
-                <button class="interval-btn" data-interval="perfect-fourth">Perfect 4th</button>
-                <button class="interval-btn" data-interval="tritone">Tritone</button>
-                <button class="interval-btn" data-interval="perfect-fifth">Perfect 5th</button>
-                <button class="interval-btn" data-interval="minor-sixth">Minor 6th</button>
-                <button class="interval-btn" data-interval="major-sixth">Major 6th</button>
-                <button class="interval-btn" data-interval="minor-seventh">Minor 7th</button>
-                <button class="interval-btn" data-interval="major-seventh">Major 7th</button>
-                <button class="interval-btn" data-interval="octave">Octave</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1>Intervals - Schedule<br><span class="accent">Notifications at Scale</span></h1>
+            <p>High-performance, distributed notification scheduling system for time-sensitive alerts, promotional campaigns, and workflow automation.</p>
+            <div class="hero-buttons">
+                <a href="#integration" class="btn btn-primary">Get Started</a>
+                <a href="#documentation" class="btn btn-secondary">Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is Intervals -->
+    <section id="what-is">
+        <div class="container">
+            <div class="section-header">
+                <h2>What is Intervals?</h2>
+                <p>Intervals is a robust application designed to schedule and trigger notifications at specified times in the future with exceptional performance and reliability.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>High Performance</h3>
+                    <p>Minimal latency delivery with optimized processing for time-critical notifications.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>High Throughput</h3>
+                    <p>Handles large volumes of concurrent notifications with ease.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Scalable</h3>
+                    <p>Horizontal scaling from small workloads to enterprise-level deployments.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Reliable</h3>
+                    <p>Built on Kafka + MongoDB with distributed locking for fault tolerance.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Flexible Scheduling</h3>
+                    <p>ISO 8601 support - single, duration, and periodic scheduling options.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Time-Sensitive</h3>
+                    <p>Perfect for reminders, alerts, promotional campaigns, and workflow automation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Distributed microservices architecture with Kafka and MongoDB</p>
             </div>
 
-            <div class="interval-info" id="interval-info">
-                <h3>Select an interval above</h3>
-                <p>Click on any interval button to learn more about it.</p>
+            <div class="architecture-diagram">
+                <pre>
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│   Your App      │────▶│  Kafka Topic     │────▶│ Assignment      │
+│   (Producer)    │     │  assignments.*   │     │ Provider        │
+└─────────────────┘     └──────────────────┘     └────────┬────────┘
+                                                         │
+                                                ┌────────▼────────┐
+                                                │   MongoDB       │
+                                                │  (Assignments, │
+                                                │   Schedules)   │
+                                                └────────┬────────┘
+                                                         │
+┌─────────────────┐     ┌──────────────────┐     ┌────────▼────────┐
+│   Your App      │◀────│  Kafka Topic     │◀────│ Notification    │
+│   (Consumer)    │     │  executions.*    │     │ Executor        │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                </pre>
             </div>
-        </section>
-    </main>
 
+            <h3 style="text-align: center; margin-bottom: 2rem;">Microservices</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Purpose</th>
+                        <th>Port</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>assignment-provider</strong></td>
+                        <td>Consumes assignments, persists to MongoDB</td>
+                        <td>8080</td>
+                    </tr>
+                    <tr>
+                        <td><strong>execution-producer</strong></td>
+                        <td>Creates execution records from schedules</td>
+                        <td>8081</td>
+                    </tr>
+                    <tr>
+                        <td><strong>notification-executor</strong></td>
+                        <td>Executes notifications at scheduled time</td>
+                        <td>8082</td>
+                    </tr>
+                    <tr>
+                        <td><strong>topic-aggregator</strong></td>
+                        <td>Aggregates Kafka topics (Streams)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>topic-distributor</strong></td>
+                        <td>Distributes topics (Streams)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>record-archiver</strong></td>
+                        <td>Archives completed records</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 2rem;">Data Flow</h3>
+                <div class="benefits-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="benefit-card" style="text-align: center;">
+                        <h3 style="color: var(--navy);">1. Send</h3>
+                        <p>Publish to assignments.t30600 with schedule header</p>
+                    </div>
+                    <div class="benefit-card" style="text-align: center;">
+                        <h3 style="color: var(--navy);">2. Store</h3>
+                        <p>Assignment Provider persists to MongoDB</p>
+                    </div>
+                    <div class="benefit-card" style="text-align: center;">
+                        <h3 style="color: var(--navy);">3. Schedule</h3>
+                        <p>Execution Producer creates execution records</p>
+                    </div>
+                    <div class="benefit-card" style="text-align: center;">
+                        <h3 style="color: var(--navy);">4. Execute</h3>
+                        <p>Notification Executor fires at the right time</p>
+                    </div>
+                    <div class="benefit-card" style="text-align: center;">
+                        <h3 style="color: var(--navy);">5. Deliver</h3>
+                        <p>Message appears on executions.t30600</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Integration -->
+    <section id="integration">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quick Integration</h2>
+                <p>Get started in minutes with just a few lines of code</p>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Step 1: Send a Scheduled Message</h3>
+            <div class="code-block">
+                <pre><span class="keyword">val</span> producer = KafkaProducer&lt;String, ByteArray&gt;(properties)
+
+<span class="keyword">val</span> record = ProducerRecord&lt;String, ByteArray&gt;(
+    <span class="string">"assignments.t30600"</span>,
+    payload
+)
+
+record.headers().add(<span class="string">"intervals-schedule"</span>, <span class="string">"2023-07-16T19:20:30.45Z"</span>)
+record.headers().add(<span class="string">"intervals-tenant-id"</span>, <span class="string">"your-tenant-id"</span>)
+
+producer.send(record)</pre>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Step 2: Receive the Execution</h3>
+            <div class="code-block">
+                <pre>consumer.subscribe(listOf(<span class="string">"executions.t30600"</span>))
+
+<span class="keyword">// When the scheduled time arrives,</span>
+<span class="keyword">// the message will be delivered here</span>
+<span class="keyword">// with all original headers preserved</span></pre>
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Headers Reference</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>Header</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>intervals-schedule</code></td>
+                        <td>Yes</td>
+                        <td>ISO 8601 schedule</td>
+                    </tr>
+                    <tr>
+                        <td><code>intervals-assignment-id</code></td>
+                        <td>No</td>
+                        <td>UUID (auto-generated if omitted)</td>
+                    </tr>
+                    <tr>
+                        <td><code>intervals-tenant-id</code></td>
+                        <td>No</td>
+                        <td>For multi-tenancy</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Schedule Formats -->
+    <section id="schedules">
+        <div class="container">
+            <div class="section-header">
+                <h2>Schedule Formats</h2>
+                <p>Intervals uses ISO 8601 based scheduling for maximum flexibility</p>
+            </div>
+
+            <div class="format-cards">
+                <div class="format-card">
+                    <h3>Single Execution</h3>
+                    <p>Execute once at the specified time.</p>
+                    <code>2023-07-16T19:20:30.45Z</code>
+                </div>
+                <div class="format-card">
+                    <h3>Duration (from now)</h3>
+                    <p>Execute at a specified duration from now.</p>
+                    <code>PT7H</code>
+                </div>
+                <div class="format-card">
+                    <h3>Periodic (recurring)</h3>
+                    <p>Execute every interval from start to end date.</p>
+                    <code>R/2023-07-16T19:20:30.45Z/PT7H/2023-07-17T20:20:30.45Z</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployment -->
+    <section id="deployment">
+        <div class="container">
+            <div class="section-header">
+                <h2>Deployment Options</h2>
+                <p>Choose the deployment method that fits your infrastructure</p>
+            </div>
+
+            <div class="deploy-options">
+                <div class="deploy-card">
+                    <h3>Docker (Local Development)</h3>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <pre>cd local_development_tools
+docker-compose -f docker-compose-dependencies.yml up -d
+docker-compose -f docker-compose.yml up -d</pre>
+                    </div>
+                </div>
+                <div class="deploy-card">
+                    <h3>Kubernetes (Production)</h3>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <pre>kubectl apply -f deployment/namespace.yaml
+<span class="keyword"># Full manifests in /deployment</span></pre>
+                    </div>
+                </div>
+                <div class="deploy-card">
+                    <h3>Build from Source</h3>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <pre>./gradlew assignment-provider:shadowJar
+java -jar assignment-provider/build/libs/assignment-provider-all.jar</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="tech-stack">
+        <div class="container">
+            <div class="section-header">
+                <h2>Technology Stack</h2>
+                <p>Built with modern, proven technologies</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>Kotlin 1.9</strong>
+                    <span>Modern JVM language</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Micronaut 4.10</strong>
+                    <span>Lightweight framework</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Apache Kafka 3.6</strong>
+                    <span>Event streaming</span>
+                </div>
+                <div class="tech-item">
+                    <strong>MongoDB 7.0</strong>
+                    <span>Document database</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Java 21</strong>
+                    <span>Latest LTS</span>
+                </div>
+                <div class="tech-item">
+                    <strong>Gradle Kotlin DSL</strong>
+                    <span>Build system</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2026 Intervals. Hosted on <a href="https://pages.github.com/">GitHub Pages</a></p>
-        <p>Visit the <a href="https://github.com/anomalyco/intervals.solutions.gihub.io">GitHub Repository</a></p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="https://github.com/anomalyco/intervals.solutions.gihub.io">GitHub Repository</a>
+                <a href="#documentation">Documentation</a>
+                <a href="#integration">API Reference</a>
+                <a href="https://github.com/anomalyco/intervals.solutions.gihub.io/issues">Issue Tracker</a>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <a href="https://github.com/anomalyco/intervals.solutions.gihub.io/discussions">Discussions</a>
+                <a href="#contributing">Contributing Guide</a>
+            </div>
+            <div class="footer-section">
+                <h3>License</h3>
+                <p>MIT License<br>Copyright (c) 2024 Daniel Stefanik</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Intervals. Hosted on <a href="https://pages.github.com/" style="color: var(--orange);">GitHub Pages</a></p>
+        </div>
     </footer>
-
-    <script>
-        const intervalData = {
-            'unison': {
-                name: 'Unison (P1)',
-                description: 'The interval between two identical notes. Both notes have the same pitch.',
-                examples: 'C to C, G to G, A to A',
-                semitones: '0 semitones'
-            },
-            'minor-second': {
-                name: 'Minor Second (m2)',
-                description: 'The smallest interval in Western music. It has a dissonant, tense sound.',
-                examples: 'C to Db, E to F, B to C',
-                semitones: '1 semitone'
-            },
-            'major-second': {
-                name: 'Major Second (M2)',
-                description: 'A whole step interval. Commonly found in scales between the first and second notes.',
-                examples: 'C to D, F to G, A to B',
-                semitones: '2 semitones'
-            },
-            'minor-third': {
-                name: 'Minor Third (m3)',
-                description: 'Gives a sad or melancholic quality. Essential in minor chords and scales.',
-                examples: 'C to Eb, A to C, E to G',
-                semitones: '3 semitones'
-            },
-            'major-third': {
-                name: 'Major Third (M3)',
-                description: 'Gives a happy or bright quality. Essential in major chords and scales.',
-                examples: 'C to E, F to A, G to B',
-                semitones: '4 semitones'
-            },
-            'perfect-fourth': {
-                name: 'Perfect Fourth (P4)',
-                description: 'A very stable interval, often used in harmonies and melodies.',
-                examples: 'C to F, G to C, D to G',
-                semitones: '5 semitones'
-            },
-            'tritone': {
-                name: 'Tritone (TT)',
-                description: 'Known as the "devil\'s interval" - it splits the octave exactly in half. Highly dissonant.',
-                examples: 'C to F#, G to C#, D to Ab',
-                semitones: '6 semitones'
-            },
-            'perfect-fifth': {
-                name: 'Perfect Fifth (P5)',
-                description: 'One of the most stable and consonant intervals. The power chord in rock music.',
-                examples: 'C to G, F to C, G to D',
-                semitones: '7 semitones'
-            },
-            'minor-sixth': {
-                name: 'Minor Sixth (m6)',
-                description: 'A moody interval often used in film scores for dramatic effect.',
-                examples: 'C to Ab, A to F, E to C',
-                semitones: '8 semitones'
-            },
-            'major-sixth': {
-                name: 'Major Sixth (M6)',
-                description: 'A bright, singing interval often used in major sixth chords.',
-                examples: 'C to A, F to D, G to E',
-                semitones: '9 semitones'
-            },
-            'minor-seventh': {
-                name: 'Minor Seventh (m7)',
-                description: 'Common in dominant seventh chords and minor seventh chords.',
-                examples: 'C to Bb, G to F, D to C',
-                semitones: '10 semitones'
-            },
-            'major-seventh': {
-                name: 'Major Seventh (M7)',
-                description: 'A dissonant interval that creates tension, often resolved to an octave.',
-                examples: 'C to B, F to E, G to F#',
-                semitones: '11 semitones'
-            },
-            'octave': {
-                name: 'Octave (P8)',
-                description: 'The same note at a higher or lower pitch. Very consonant and stable.',
-                examples: 'C to C (higher), A to A (lower), G to G (higher)',
-                semitones: '12 semitones'
-            }
-        };
-
-        const buttons = document.querySelectorAll('.interval-btn');
-        const infoDiv = document.getElementById('interval-info');
-
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const interval = btn.dataset.interval;
-                const data = intervalData[interval];
-
-                infoDiv.innerHTML = `
-                    <h3>${data.name}</h3>
-                    <p><strong>Description:</strong> ${data.description}</p>
-                    <p><strong>Examples:</strong> ${data.examples}</p>
-                    <p><strong>Size:</strong> ${data.semitones}</p>
-                `;
-            });
-        });
-    </script>
 </body>
 </html>
