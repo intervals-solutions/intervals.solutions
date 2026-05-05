@@ -1,0 +1,446 @@
+/* Intervals - Main Stylesheet */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #0F172A;
+    --white: #FFFFFF;
+    --orange: #F59E0B;
+    --gray-100: #F1F5F9;
+    --gray-200: #E2E8F0;
+    --gray-300: #CBD5E1;
+    --gray-700: #334155;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--navy);
+    background: var(--white);
+}
+
+/* ===== Navigation ===== */
+nav {
+    background: var(--navy);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--gray-300);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--orange);
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1E293B 100%);
+    color: var(--white);
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero h1 strong {
+    color: var(--orange);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--gray-300);
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: var(--orange);
+    color: var(--navy);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--gray-300);
+}
+
+.btn-secondary:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+/* ===== Sections ===== */
+section {
+    padding: 5rem 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--gray-700);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section-subheader {
+    margin-bottom: 1rem;
+    color: var(--navy);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* ===== What is Intervals ===== */
+#what-is {
+    background: var(--gray-100);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.benefit-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-card h3 {
+    color: var(--orange);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-card p {
+    color: var(--gray-700);
+}
+
+/* ===== How It Works ===== */
+#how-it-works {
+    background: var(--white);
+}
+
+.architecture-flow {
+    background: var(--navy);
+    color: var(--white);
+    padding: 3rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 2rem 0;
+}
+
+.flow-box {
+    padding: 1.5rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.flow-box.light {
+    background: var(--white);
+    color: var(--navy);
+}
+
+.flow-box.orange {
+    background: var(--orange);
+    color: var(--navy);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.flow-arrow {
+    color: var(--orange);
+    font-size: 2rem;
+    margin: 0 1rem;
+}
+
+.flow-note {
+    color: var(--gray-300);
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* ===== Quick Integration ===== */
+#integration {
+    background: var(--gray-100);
+}
+
+.code-block {
+    background: var(--navy);
+    color: var(--gray-300);
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.code-block .keyword {
+    color: var(--orange);
+}
+
+.code-block .string {
+    color: #10B981;
+}
+
+/* ===== Schedule Formats ===== */
+#schedules {
+    background: var(--white);
+}
+
+.format-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.format-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid var(--gray-200);
+    transition: border-color 0.3s ease;
+}
+
+.format-card:hover {
+    border-color: var(--orange);
+}
+
+.format-card h3 {
+    color: var(--navy);
+    margin-bottom: 1rem;
+}
+
+.format-card code {
+    background: var(--gray-100);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: block;
+    margin-top: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--orange);
+    word-break: break-all;
+}
+
+/* ===== Contact ===== */
+#contact {
+    background: var(--gray-100);
+}
+
+.contact-info {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-info a {
+    color: var(--orange);
+    font-weight: 600;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Footer ===== */
+footer {
+    background: var(--navy);
+    color: var(--gray-300);
+    padding: 3rem 2rem 2rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.footer-section a {
+    color: var(--gray-300);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: var(--orange);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-700);
+    color: var(--gray-700);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .architecture-flow {
+        padding: 1.5rem;
+    }
+
+    .flow-diagram {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
