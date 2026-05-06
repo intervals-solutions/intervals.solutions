@@ -83,12 +83,16 @@
 
             <div class="architecture-flow">
                 <div class="flow-diagram">
-                    <div class="flow-box light">Your Application (Producer)</div>
+                    <div class="flow-box light">Your Application<br>(Producer)</div>
                     <span class="flow-arrow">→</span>
-                    <div class="flow-box orange">Intervals</div>
+                    <div class="flow-box orange">
+                        Intervals
+                        <div style="font-size: 0.8rem; font-weight: 400; margin-top: 0.5rem;">Schedules & tracks time</div>
+                    </div>
                     <span class="flow-arrow">→</span>
-                    <div class="flow-box light">Your Application (Consumer)</div>
+                    <div class="flow-box light">Your Application<br>(Consumer)</div>
                 </div>
+                <p class="flow-note">Intervals continuously monitor the current time and deliver your message when scheduled</p>
             </div>
         </div>
     </section>
