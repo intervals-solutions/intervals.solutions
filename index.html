@@ -101,9 +101,18 @@
                 <p>Get started in minutes with just a few lines of code</p>
             </div>
 
-            <h3 class="section-subheader">Step 1: Send a Scheduled Message</h3>
-            <div class="code-block">
-                <pre><span class="keyword">val</span> producer = KafkaProducer&lt;String, ByteArray&gt;(properties)
+            <!-- Language Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-lang="java">Java</button>
+                <button class="tab-btn" data-lang="python">Python</button>
+                <button class="tab-btn" data-lang="javascript">JavaScript</button>
+            </div>
+
+            <!-- Java -->
+            <div class="tab-content active" id="java">
+                <h3 class="section-subheader">Step 1: Send a Scheduled Message</h3>
+                <div class="code-block">
+                    <pre><span class="keyword">val</span> producer = KafkaProducer&lt;String, ByteArray&gt;(properties)
 
 <span class="keyword">val</span> record = ProducerRecord&lt;String, ByteArray&gt;(
     <span class="string">"assignments.&lt;your-tenant&gt;"</span>,
@@ -113,15 +122,102 @@
 record.headers().add(<span class="string">"intervals-schedule"</span>, <span class="string">"2026-07-21T19:20:30.45Z"</span>)
 
 producer.send(record)</pre>
-            </div>
+                </div>
 
-            <h3 class="section-subheader">Step 2: Receive the Execution</h3>
-            <div class="code-block">
-                <pre>consumer.subscribe(<span class="string">"executions.t30600"</span>)
+                <h3 class="section-subheader">Step 2: Receive the Execution</h3>
+                <div class="code-block">
+                    <pre>consumer.subscribe(<span class="string">"executions.t30600"</span>)
 
 <span class="keyword">// When the scheduled time arrives,</span>
 <span class="keyword">// the message will be delivered here</span>
 <span class="keyword">// with all original headers preserved</span></pre>
+                </div>
+            </div>
+
+            <!-- Python -->
+            <div class="tab-content" id="python">
+                <h3 class="section-subheader">Step 1: Send a Scheduled Message</h3>
+                <div class="code-block">
+                    <pre><span class="keyword">from</span> kafka import KafkaProducer
+<span class="keyword">import</span> json
+
+producer = KafkaProducer(bootstrap_servers=<span class="string">'localhost:9092'</span>)
+
+topic = <span class="string">"assignments.&lt;your-tenant&gt;"</span>
+payload = json.dumps({<span class="string">"message"</span>: <span class="string">"Hello"</span>}).encode(<span class="string">'utf-8'</span>)
+
+producer.send(
+    topic,
+    value=payload,
+    headers=[
+        (<span class="string">"intervals-schedule"</span>, <span class="string">"2026-07-21T19:20:30.45Z"</span>.encode()),
+        (<span class="string">"intervals-tenant-id"</span>, <span class="string">"your-tenant"</span>.encode())
+    ]
+)
+
+producer.flush()</pre>
+                </div>
+
+                <h3 class="section-subheader">Step 2: Receive the Execution</h3>
+                <div class="code-block">
+                    <pre><span class="keyword">from</span> kafka import KafkaConsumer
+
+consumer = KafkaConsumer(
+    <span class="string">'executions.t30600'</span>,
+    bootstrap_servers=<span class="string">'localhost:9092'</span>,
+    auto_offset_reset=<span class="string">'earliest'</span>
+)
+
+<span class="keyword">for</span> message <span class="keyword">in</span> consumer:
+    <span class="keyword"># When the scheduled time arrives,</span>
+    <span class="keyword"># the message will be delivered here</span>
+    <span class="keyword"># with all original headers preserved</span>
+    print(message.value)</pre>
+                </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="tab-content" id="javascript">
+                <h3 class="section-subheader">Step 1: Send a Scheduled Message</h3>
+                <div class="code-block">
+                    <pre><span class="keyword">const</span> { Kafka } = <span class="keyword">require</span>(<span class="string">'kafkajs'</span>);
+
+<span class="keyword">const</span> kafka = <span class="keyword">new</span> Kafka({
+  clientId: <span class="string">'my-app'</span>,
+  brokers: [<span class="string">'localhost:9092'</span>]
+});
+
+<span class="keyword">const</span> producer = kafka.producer();
+<span class="keyword">await</span> producer.connect();
+
+<span class="keyword">await</span> producer.send({
+  topic: <span class="string">"assignments.&lt;your-tenant&gt;"</span>,
+  messages: [
+    {
+      value: JSON.stringify({ message: <span class="string">"Hello"</span> }),
+      headers: {
+        <span class="string">"intervals-schedule"</span>: <span class="string">"2026-07-21T19:20:30.45Z"</span>
+      }
+    }
+  ]
+});</pre>
+                </div>
+
+                <h3 class="section-subheader">Step 2: Receive the Execution</h3>
+                <div class="code-block">
+                    <pre><span class="keyword">const</span> consumer = kafka.consumer({ groupId: <span class="string">'test-group'</span> });
+<span class="keyword">await</span> consumer.connect();
+<span class="keyword">await</span> consumer.subscribe({ topic: <span class="string">'executions.t30600'</span> });
+
+<span class="keyword">await</span> consumer.run({
+  <span class="keyword">eachMessage</span>: <span class="keyword">async</span> ({ topic, partition, message }) => {
+    <span class="keyword">// When the scheduled time arrives,</span>
+    <span class="keyword">// the message will be delivered here</span>
+    <span class="keyword">// with all original headers preserved</span>
+    console.log(message.value.toString());
+  },
+});</pre>
+                </div>
             </div>
         </div>
     </section>
@@ -177,5 +273,25 @@ producer.send(record)</pre>
             <p>© 2026 Intervals.</p>
         </div>
     </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(lang).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
